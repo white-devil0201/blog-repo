@@ -1,0 +1,62 @@
+STATUS_CHOICE :- It refers to the status of an article or blog. So it may have one of the 2 status draft or published. d represents the internal value and D represents the external value. 
+
+slug :- slug field can be used in urls it is short label containing only alphabets, numbers, underscore and hifans we can use slug field to built human understandable and SEOP(search engine optemisation) urls
+
+note :-
+
+url = Unifrom resource locator
+Absolute url & Relative url 
+
+uri = Unifrom resource identifier
+
+http://domain/part1/part2/part3/images/1.jpeg ===> absolute url 
+http://domain/images/1.jpeg ===> relative url
+
+http://domain/part1/part2/part3/images/1.jpeg ===> absolute url ===> absolute uri http://domain/part1/part2/part3/part4/static/images/myimages/1.jpeg ===> absolute uri 
+abs url is the part of abs uri
+
+HttpRequest.build_absolute_uri(location=None) 
+request.build_absolue_uri(post.get_absolute_url())
+
+http://127.0.0.1:8000/2020/12/24/bangalore-information 
+
+Returns the absolute URI form of location. 
+If no location is provided, the location will be set to request.get_full_path(). 
+
+request.build_absolute_uri()
+'https://example.com/music/bands/the_beatles/?print=true'
+
+request.build_absolute_uri('/bands/')
+'https://example.com/bands/'
+
+request.build_absolute_uri('https://example2.com/bands/')
+'https://example2.com/bands/'
+
+
+Email password = zklqvnhkdqhzharv
+
+
+to make the tags using console
+
+PS C:\Users\mehta\DjangoApplications\blog_Project> py manage.py shell
+Python 3.10.1 (tags/v3.10.1:2cd268a, Dec  6 2021, 19:10:37) [MSC v.1929 64 bit (AMD64)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> from myApp.models import Post
+>>> post = Post.object.get(id=2)
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+AttributeError: type object 'Post' has no attribute 'object'
+>>> post = Post.objects.get(id=2) 
+>>> post.title
+'HTML Information'
+>>> post.tags.add("HTML","HTML tags")
+>>> post.tags.all()
+<QuerySet [<Tag: HTML>, <Tag: HTML tags>]>
+
+
+- types of custom tags :-
+
+-> simple tags :- perform some processing and return string.
+-> inclusion tags :- perform some processing and returns a rendered template.
+-> assignment tags :- perform some processing and assign result to the variable in context.

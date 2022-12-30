@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+    {% extends "myApp/parent.html" %}
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Share By Mail</title>
+</head>
+<body>
+    {% block content_block %}
+    <center>
+        <h1 style="color: red;"><u>Fill out the details</u></h1> <br><br>
+        <form method="post">
+            {{form.as_p}}
+            {% csrf_token %}
+            <input type="submit" class="btn btn-lg btn-primary" value="SendMail">
+        </form>
+    </center>
+    {% endblock %}
+</body>
+</html>

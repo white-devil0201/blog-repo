@@ -1,0 +1,50 @@
+<!-- 
+    1. We have to display no.of comments
+    2. For every comment, add head part body part
+    3. Add comment form to submit a new comment
+    4. If already submitted, then display a success message 
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+    {% extends 'myApp/parent.html' %}
+    {% block title_block %}
+    {{post.title}}
+    {% endblock %}
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post List</title>
+</head>
+<body>
+    {% block content_block %}
+    <h1>{{post.title}}</h1>
+    <p>Published on {{post.publish}} by {{post.author|title}}</p>
+    {{post.body|linebreaks}}
+    <a href="/{{post.id}}/share" class="btn btn-primary"> <b>POST By Mail</b></a>
+
+    {% with comments.count as comments_count %}
+    <h2>{{comments_count}} Comment{{comments_count|pluralize}} </h2>
+    {% endwith %}
+    {% if comments %}
+    {% for c in comments %}
+    <p>Comment {{forloop.counter}} by {{c.name}}</p>
+    <div> {{c.body|linebreaks}} </div>
+    <hr>
+    {% endfor %}
+    {% else %}
+    <p style="color: navy; font-size: 30px; font-style: italic; border-bottom: 2px solid red;">There are no comments </p>
+    {% endif %}
+    {% if csubmit %}
+    <h2>Thank you...Your comment has been added successfully!!!</h2>
+    {% else %}
+    <form method="post">
+        {{form.as_p}}
+        {% csrf_token %}
+        <input type="submit" class="btn btn-primary" value="Submit">
+    </form>
+    {% endif %}
+    {% endblock %}
+</body>
+</html>

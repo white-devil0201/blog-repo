@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+    {% load mytags %} <!--loading mytags python file -->
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <title>
+        {% block title_block %}
+        {% endblock %}
+    </title>
+</head>
+<body>
+    <div class="content" style="width: 70%; float: left;background-color: chartreuse;height: auto; padding: 0 0 0 30px;">
+        {% block content_block %}
+        {% endblock %}
+    </div>
+    <div class="sidebar" style="width: 30%; float: right;background-color: aquamarine;height: 120vh; padding: 0 0 0 10px;">
+        <h2>Nisarg's Blog</h2>
+        <h3>
+            Total Publication
+            <span style="color: red; font-size: 28px;">
+                {% total_posts %}  <!-- calling the function of mytags using -->
+            </span>
+                <h3>Latest Posts</h3>
+                {% show_latest_posts %}
+
+                <h3>Most Commented Post</h3>
+                {% get_most_commented_posts as m%}
+                <ol>
+                    {% for post in m %}
+                    <li><a href=" {{post.get_absolute_url}} "> {{post.title}}</a></li>
+                    {% endfor %}
+                </ol>
+        </h3>
+    </div>
+</body>
+</html>
